@@ -47,6 +47,10 @@ val Colors.serviceSearchBarColor: Color
     @Composable
     get() = if (isLight) Color(0x33635F5F) else Color(0x80000000)
 
+val Colors.countersBackground: Color
+    @Composable
+    get() = if (isLight) Color(0x1E635F5F) else Color(0x80000000)
+
 val Colors.serviceHeadItemBackgroundColor: Color
     @Composable
     get() = if (isLight) Color(0x33635F5F) else Color(0x80000000)

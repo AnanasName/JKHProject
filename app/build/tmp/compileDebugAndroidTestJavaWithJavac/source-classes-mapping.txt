@@ -1,0 +1,2 @@
+com/example/jkhproject/test/BuildConfig.java
+ com.example.jkhproject.test.BuildConfig

@@ -6,4 +6,5 @@ object Constants {
     const val BUILDING_SCREEN = "building"
     const val BILLINGS_SCREEN = "events"
     const val OTHER_SCREEN = "other"
+    const val BASE_URL = "github.com"
 }
