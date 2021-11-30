@@ -11,6 +11,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,6 +32,9 @@ fun NewsScreen(
     newsViewModel: NewsViewModel,
     navController: NavController
 ) {
+
+    val allNews by newsViewModel.news.collectAsState()
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -38,33 +43,7 @@ fun NewsScreen(
         Column(modifier = Modifier.padding(start = 17.dp, end = 17.dp, top = 6.dp, bottom=17.dp)) {
             NewsAppBar()
             ListContent(
-                newsList = newsViewModel.news.value
-//                newsList = listOf(
-//                    News(
-//                        title = "Доска объявлений",
-//                        subDescription = "Или как начать дружить с соседями",
-//                        date = "17 марта",
-//                        description = "dasjghlsdfghskdgd"
-//                    ),
-//                    News(
-//                        title = "Функция автоплатеж",
-//                        subDescription = "Уже доступна в вашем профиле",
-//                        date = "10 марта",
-//                        description = "dasjghlsdfghskdgd"
-//                    ),
-//                    News(
-//                        title = "Цифровая доска объявлений",
-//                        subDescription = "Разместите объявление",
-//                        date = "10 марта",
-//                        description = "dasjghlsdfghskdgd"
-//                    ),
-//                    News(
-//                        title = "Что - то крутое",
-//                        subDescription = "Что-то есть",
-//                        date = "10 марта",
-//                        description = "dasjghlsdfghskdgd"
-//                    ),
-//                )
+                newsList = allNews
             )
         }
         AppBottomMenu(
@@ -80,7 +59,9 @@ fun NewsScreen(
 fun ListContent(
     newsList: List<NewsNetModel>,
 ) {
-    Box(modifier = Modifier.fillMaxHeight(0.89f).background(Color.White)) {
+    Box(modifier = Modifier
+        .fillMaxHeight(0.89f)
+        .background(Color.White)) {
         LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)){
             items(
                 newsList

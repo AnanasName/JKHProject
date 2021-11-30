@@ -16,6 +16,7 @@ import com.example.jkhproject.data.models.network.NewsNetModel
 import com.example.jkhproject.ui.theme.highlightTextColor
 import com.example.jkhproject.ui.theme.newsItemBackgroundColor
 import com.example.jkhproject.ui.theme.newsItemSubtitleColor
+import com.example.jkhproject.util.Utils.Companion.getDateTime
 
 @Composable
 fun NewsItem(
@@ -25,7 +26,7 @@ fun NewsItem(
         Column(verticalArrangement = Arrangement.Center) {
             Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
                 Text(text = "НОВОСТЬ", color = MaterialTheme.colors.highlightTextColor, fontWeight = FontWeight.Bold)
-                Text(text = newsItem.issued)
+                Text(text = getDateTime(newsItem.issued))
             }
             Text(
                 modifier = Modifier.fillMaxWidth(),

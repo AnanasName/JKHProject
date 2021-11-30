@@ -75,11 +75,11 @@ import hilt_aggregated_deps._dagger_hilt_android_internal_modules_HiltWrapper_Ac
         _dagger_hilt_android_internal_managers_ViewComponentManager_ViewWithFragmentComponentBuilderEntryPoint.class,
         _dagger_hilt_android_internal_modules_ApplicationContextModule.class,
         _dagger_hilt_android_internal_modules_HiltWrapper_ActivityModule.class,
+        _com_example_jkhproject_di_NetworkModule.class,
         _com_example_jkhproject_JkhApplication_GeneratedInjector.class,
         _com_example_jkhproject_MainActivity_GeneratedInjector.class,
         _com_example_jkhproject_ui_viewmodels_NewsViewModel_HiltModules_BindsModule.class,
-        _com_example_jkhproject_ui_viewmodels_NewsViewModel_HiltModules_KeyModule.class,
-        _com_example_jkhproject_di_NetworkModule.class
+        _com_example_jkhproject_ui_viewmodels_NewsViewModel_HiltModules_KeyModule.class
     }
 )
 class JkhApplication_ComponentTreeDeps {
