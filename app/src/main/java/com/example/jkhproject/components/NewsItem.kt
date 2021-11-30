@@ -12,19 +12,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jkhproject.data.models.News
+import com.example.jkhproject.data.models.network.NewsNetModel
 import com.example.jkhproject.ui.theme.highlightTextColor
 import com.example.jkhproject.ui.theme.newsItemBackgroundColor
 import com.example.jkhproject.ui.theme.newsItemSubtitleColor
 
 @Composable
 fun NewsItem(
-    newsItem: News
+    newsItem: NewsNetModel
 ) {
     Box( modifier = Modifier.background(MaterialTheme.colors.newsItemBackgroundColor, shape = RoundedCornerShape(8.dp)).padding(14.dp)){
         Column(verticalArrangement = Arrangement.Center) {
             Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
                 Text(text = "НОВОСТЬ", color = MaterialTheme.colors.highlightTextColor, fontWeight = FontWeight.Bold)
-                Text(text = newsItem.date)
+                Text(text = newsItem.issued)
             }
             Text(
                 modifier = Modifier.fillMaxWidth(),
@@ -34,7 +35,7 @@ fun NewsItem(
             )
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = newsItem.subDescription,
+                text = newsItem.description,
                 style = MaterialTheme.typography.subtitle1,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colors.newsItemSubtitleColor
@@ -42,17 +43,4 @@ fun NewsItem(
         }
 
     }
-}
-
-@Preview
-@Composable
-fun NewsItemPreview() {
-    NewsItem(
-        News(
-            title = "Доска объявлений",
-            subDescription = "Или как начать дружить с соседями",
-            date = "17 марта",
-            description = "dasjghlsdfghskdgd"
-        )
-    )
 }

@@ -2,6 +2,7 @@ package com.example.jkhproject.di
 
 import com.example.jkhproject.data.api.JkhService
 import com.example.jkhproject.util.Constants.BASE_URL
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +29,8 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideConverterFactory(): GsonConverterFactory{
-        return GsonConverterFactory.create()
+        val gson = GsonBuilder().setLenient().create()
+        return GsonConverterFactory.create(gson)
     }
 
     @Singleton

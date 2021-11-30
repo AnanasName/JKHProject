@@ -7,7 +7,13 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
+import com.example.jkhproject.data.api.JkhService;
 import com.example.jkhproject.data.repositories.NewsRepository;
+import com.example.jkhproject.di.NetworkModule;
+import com.example.jkhproject.di.NetworkModule_ProvideConverterFactoryFactory;
+import com.example.jkhproject.di.NetworkModule_ProvideHttpClientFactory;
+import com.example.jkhproject.di.NetworkModule_ProvideJkhServiceFactory;
+import com.example.jkhproject.di.NetworkModule_ProvideRetrofitInstanceFactory;
 import com.example.jkhproject.ui.viewmodels.NewsViewModel;
 import com.example.jkhproject.ui.viewmodels.NewsViewModel_HiltModules_KeyModule_ProvideFactory;
 import dagger.hilt.android.ActivityRetainedLifecycle;
@@ -31,6 +37,9 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import javax.inject.Provider;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 @DaggerGenerated
 @SuppressWarnings({
@@ -42,6 +51,14 @@ public final class DaggerJkhApplication_HiltComponents_SingletonC extends JkhApp
 
   private final DaggerJkhApplication_HiltComponents_SingletonC singletonC = this;
 
+  private volatile Object okHttpClient = new MemoizedSentinel();
+
+  private volatile Object gsonConverterFactory = new MemoizedSentinel();
+
+  private volatile Object retrofit = new MemoizedSentinel();
+
+  private volatile Object jkhService = new MemoizedSentinel();
+
   private DaggerJkhApplication_HiltComponents_SingletonC(
       ApplicationContextModule applicationContextModuleParam) {
     this.applicationContextModule = applicationContextModuleParam;
@@ -49,6 +66,62 @@ public final class DaggerJkhApplication_HiltComponents_SingletonC extends JkhApp
 
   public static Builder builder() {
     return new Builder();
+  }
+
+  private OkHttpClient okHttpClient() {
+    Object local = okHttpClient;
+    if (local instanceof MemoizedSentinel) {
+      synchronized (local) {
+        local = okHttpClient;
+        if (local instanceof MemoizedSentinel) {
+          local = NetworkModule_ProvideHttpClientFactory.provideHttpClient();
+          okHttpClient = DoubleCheck.reentrantCheck(okHttpClient, local);
+        }
+      }
+    }
+    return (OkHttpClient) local;
+  }
+
+  private GsonConverterFactory gsonConverterFactory() {
+    Object local = gsonConverterFactory;
+    if (local instanceof MemoizedSentinel) {
+      synchronized (local) {
+        local = gsonConverterFactory;
+        if (local instanceof MemoizedSentinel) {
+          local = NetworkModule_ProvideConverterFactoryFactory.provideConverterFactory();
+          gsonConverterFactory = DoubleCheck.reentrantCheck(gsonConverterFactory, local);
+        }
+      }
+    }
+    return (GsonConverterFactory) local;
+  }
+
+  private Retrofit retrofit() {
+    Object local = retrofit;
+    if (local instanceof MemoizedSentinel) {
+      synchronized (local) {
+        local = retrofit;
+        if (local instanceof MemoizedSentinel) {
+          local = NetworkModule_ProvideRetrofitInstanceFactory.provideRetrofitInstance(okHttpClient(), gsonConverterFactory());
+          retrofit = DoubleCheck.reentrantCheck(retrofit, local);
+        }
+      }
+    }
+    return (Retrofit) local;
+  }
+
+  private JkhService jkhService() {
+    Object local = jkhService;
+    if (local instanceof MemoizedSentinel) {
+      synchronized (local) {
+        local = jkhService;
+        if (local instanceof MemoizedSentinel) {
+          local = NetworkModule_ProvideJkhServiceFactory.provideJkhService(retrofit());
+          jkhService = DoubleCheck.reentrantCheck(jkhService, local);
+        }
+      }
+    }
+    return (JkhService) local;
   }
 
   @Override
@@ -73,6 +146,15 @@ public final class DaggerJkhApplication_HiltComponents_SingletonC extends JkhApp
 
     public Builder applicationContextModule(ApplicationContextModule applicationContextModule) {
       this.applicationContextModule = Preconditions.checkNotNull(applicationContextModule);
+      return this;
+    }
+
+    /**
+     * @deprecated This module is declared, but an instance is not used in the component. This method is a no-op. For more, see https://dagger.dev/unused-modules.
+     */
+    @Deprecated
+    public Builder networkModule(NetworkModule networkModule) {
+      Preconditions.checkNotNull(networkModule);
       return this;
     }
 
@@ -412,7 +494,7 @@ public final class DaggerJkhApplication_HiltComponents_SingletonC extends JkhApp
           synchronized (local) {
             local = newsRepository;
             if (local instanceof MemoizedSentinel) {
-              local = new NewsRepository();
+              local = new NewsRepository(singletonC.jkhService());
               newsRepository = DoubleCheck.reentrantCheck(newsRepository, local);
             }
           }

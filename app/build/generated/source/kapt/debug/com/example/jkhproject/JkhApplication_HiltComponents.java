@@ -1,5 +1,6 @@
 package com.example.jkhproject;
 
+import com.example.jkhproject.di.NetworkModule;
 import com.example.jkhproject.ui.viewmodels.NewsViewModel_HiltModules;
 import dagger.Binds;
 import dagger.Component;
@@ -115,7 +116,8 @@ public final class JkhApplication_HiltComponents {
       modules = {
           ApplicationContextModule.class,
           ActivityRetainedCBuilderModule.class,
-          ServiceCBuilderModule.class
+          ServiceCBuilderModule.class,
+          NetworkModule.class
       }
   )
   @Singleton

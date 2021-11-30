@@ -21,6 +21,7 @@ import androidx.navigation.NavController
 import com.example.jkhproject.components.AppBottomMenu
 import com.example.jkhproject.components.NewsItem
 import com.example.jkhproject.data.models.News
+import com.example.jkhproject.data.models.network.NewsNetModel
 import com.example.jkhproject.ui.viewmodels.NewsViewModel
 
 @ExperimentalMaterialApi
@@ -37,32 +38,33 @@ fun NewsScreen(
         Column(modifier = Modifier.padding(start = 17.dp, end = 17.dp, top = 6.dp, bottom=17.dp)) {
             NewsAppBar()
             ListContent(
-                newsList = listOf(
-                    News(
-                        title = "Доска объявлений",
-                        subDescription = "Или как начать дружить с соседями",
-                        date = "17 марта",
-                        description = "dasjghlsdfghskdgd"
-                    ),
-                    News(
-                        title = "Функция автоплатеж",
-                        subDescription = "Уже доступна в вашем профиле",
-                        date = "10 марта",
-                        description = "dasjghlsdfghskdgd"
-                    ),
-                    News(
-                        title = "Цифровая доска объявлений",
-                        subDescription = "Разместите объявление",
-                        date = "10 марта",
-                        description = "dasjghlsdfghskdgd"
-                    ),
-                    News(
-                        title = "Что - то крутое",
-                        subDescription = "Что-то есть",
-                        date = "10 марта",
-                        description = "dasjghlsdfghskdgd"
-                    ),
-                )
+                newsList = newsViewModel.news.value
+//                newsList = listOf(
+//                    News(
+//                        title = "Доска объявлений",
+//                        subDescription = "Или как начать дружить с соседями",
+//                        date = "17 марта",
+//                        description = "dasjghlsdfghskdgd"
+//                    ),
+//                    News(
+//                        title = "Функция автоплатеж",
+//                        subDescription = "Уже доступна в вашем профиле",
+//                        date = "10 марта",
+//                        description = "dasjghlsdfghskdgd"
+//                    ),
+//                    News(
+//                        title = "Цифровая доска объявлений",
+//                        subDescription = "Разместите объявление",
+//                        date = "10 марта",
+//                        description = "dasjghlsdfghskdgd"
+//                    ),
+//                    News(
+//                        title = "Что - то крутое",
+//                        subDescription = "Что-то есть",
+//                        date = "10 марта",
+//                        description = "dasjghlsdfghskdgd"
+//                    ),
+//                )
             )
         }
         AppBottomMenu(
@@ -76,7 +78,7 @@ fun NewsScreen(
 @ExperimentalMaterialApi
 @Composable
 fun ListContent(
-    newsList: List<News>,
+    newsList: List<NewsNetModel>,
 ) {
     Box(modifier = Modifier.fillMaxHeight(0.89f).background(Color.White)) {
         LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)){
